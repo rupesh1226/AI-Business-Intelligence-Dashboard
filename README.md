@@ -174,7 +174,7 @@ The main objective of this project is to simplify business data analysis by prov
 
 ## 👨‍💻 Developer
 
-**Roopesh Timmapatini**
+**Roopesh Thimmapathini**
 
 B.Tech – Data Science | Pragati Engineering College
 
