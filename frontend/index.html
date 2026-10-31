@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Business Intelligence</title>
+
+    <link rel="stylesheet" href="/frontend/css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>AI Business Intelligence</h1>
+
+            <p class="subtitle">
+                Upload your CSV or Excel file and automatically generate
+                an intelligent business dashboard.
+            </p>
+
+
+            <!-- Upload Area -->
+
+            <div class="upload-area">
+
+                <h2>Upload Dataset</h2>
+
+                <p>
+                    Supported formats:
+                    CSV, XLSX, XLS
+                </p>
+
+                <input
+                    type="file"
+                    id="fileInput"
+                    accept=".csv,.xlsx,.xls"
+                >
+
+                <button
+                    id="uploadButton"
+                    onclick="uploadFile()"
+                >
+                    Upload & Analyze
+                </button>
+
+            </div>
+
+
+            <!-- Status -->
+
+            <div id="status"></div>
+
+
+            <!-- Dataset Information -->
+
+            <div
+                id="datasetInfo"
+                class="dataset-info"
+                style="display: none;"
+            >
+
+                <h2>Dataset Uploaded Successfully</h2>
+
+                <p>
+                    <strong>File:</strong>
+                    <span id="fileName"></span>
+                </p>
+
+                <p>
+                    <strong>Rows:</strong>
+                    <span id="rowCount"></span>
+                </p>
+
+                <p>
+                    <strong>Columns:</strong>
+                    <span id="columnCount"></span>
+                </p>
+
+                <button
+                    onclick="openDashboard()"
+                >
+                    Open Dashboard
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="/frontend/js/app.js"></script>
+
+</body>
+
+</html>

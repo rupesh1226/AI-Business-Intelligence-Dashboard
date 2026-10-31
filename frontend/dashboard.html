@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        AI Business Intelligence Dashboard
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+
+    <!-- =========================================
+         LOCAL CHART.JS
+         MUST LOAD BEFORE dashboard.js
+         ========================================= -->
+
+    <script
+        src="/js/chart.umd.min.js?v=4.5.0"
+    ></script>
+
+</head>
+
+
+<body>
+
+
+<header class="dashboard-header">
+
+    <div class="brand-block">
+
+        <div class="brand-icon">
+            AI
+        </div>
+
+        <div>
+
+            <h1>
+                AI Business Intelligence
+            </h1>
+
+            <p>
+                Automatic Data Analytics Dashboard
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <button
+        onclick="refreshDashboard()"
+        class="refresh-btn"
+    >
+
+        <span>
+            ↻
+        </span>
+
+        Refresh
+
+    </button>
+
+</header>
+
+
+<main
+    id="dashboard"
+    class="dashboard-container"
+>
+
+
+    <!-- =========================================
+         DATASET INFORMATION
+         ========================================= -->
+
+    <section class="dataset-info">
+
+        <div class="dataset-card">
+
+            <span>
+                Dataset
+            </span>
+
+            <strong id="datasetName">
+                Loading...
+            </strong>
+
+        </div>
+
+
+        <div class="dataset-card">
+
+            <span>
+                File
+            </span>
+
+            <strong id="filename">
+                Loading...
+            </strong>
+
+        </div>
+
+
+        <div class="dataset-card">
+
+            <span>
+                Rows
+            </span>
+
+            <strong id="rowCount">
+                -
+            </strong>
+
+        </div>
+
+
+        <div class="dataset-card">
+
+            <span>
+                Columns
+            </span>
+
+            <strong id="columnCount">
+                -
+            </strong>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         FILTERS
+         ========================================= -->
+
+    <section class="section-block filter-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-kicker">
+                    DATA FILTERS
+                </span>
+
+                <h2>
+                    Filter Dashboard
+                </h2>
+
+                <p>
+                    Filters are automatically generated
+                    from the dataset.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="filterContainer"
+            class="filter-container"
+        >
+
+            <div class="loading">
+                Loading filters...
+            </div>
+
+        </div>
+
+
+        <div class="filter-actions">
+
+            <button
+                id="applyFiltersBtn"
+                class="refresh-btn"
+                type="button"
+                onclick="applyFilters()"
+            >
+
+                ✓ Apply Filters
+
+            </button>
+
+
+            <button
+                id="clearFiltersBtn"
+                class="clear-filter-btn"
+                type="button"
+                onclick="clearFilters()"
+            >
+
+                ↺ Clear Filters
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         KPI
+         ========================================= -->
+
+    <section class="section-block">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-kicker">
+                    OVERVIEW
+                </span>
+
+                <h2>
+                    Key Performance Indicators
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="kpiContainer"
+            class="kpi-grid"
+        >
+
+            <div class="loading">
+                Loading KPIs...
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         DETECTED TYPES
+         ========================================= -->
+
+    <section class="section-block">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-kicker">
+                    AI ANALYSIS
+                </span>
+
+                <h2>
+                    Detected Data Types
+                </h2>
+
+            </div>
+
+            <span class="auto-label">
+                Automatic
+            </span>
+
+        </div>
+
+
+        <div
+            id="detectedColumns"
+            class="detected-columns"
+        >
+
+            <span class="muted">
+                Detecting columns...
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         CHARTS
+         ========================================= -->
+
+    <section class="section-block">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-kicker">
+                    VISUAL ANALYTICS
+                </span>
+
+                <h2>
+                    Automatic Visualizations
+                </h2>
+
+                <p>
+                    Charts are selected automatically
+                    based on the structure of your dataset.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="chartContainer"
+            class="chart-grid"
+        >
+
+            <div class="loading">
+                Generating charts...
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- =========================================
+     DASHBOARD JAVASCRIPT
+     Chart.js is already loaded above
+     ========================================= -->
+
+<script
+    src="/js/dashboard.js?v=20260927"
+></script>
+
+
+</body>
+
+</html>
