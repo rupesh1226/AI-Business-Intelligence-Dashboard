@@ -180,7 +180,7 @@ B.Tech – Data Science | Pragati Engineering College
 
 **Interests:** Data Analytics, Artificial Intelligence, Full Stack Development and Business Intelligence.
 
-**Portfolio:** https://rupesh1226.github.io/portfolio-website/
+**Portfolio:** https://rupesh1226.github.io/
 
 ---
 
