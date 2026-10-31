@@ -1,3 +1,4 @@
+
 from pathlib import Path
 
 from fastapi import FastAPI
@@ -6,6 +7,10 @@ from fastapi.responses import FileResponse
 
 from app.routes.upload import router as upload_router
 from app.routes.dashboard import router as dashboard_router
+
+# Database imports
+from app.database import Base, engine
+from app import models
 
 
 # =====================================================
@@ -16,6 +21,18 @@ app = FastAPI(
     title="AI Business Intelligence API",
     version="1.0.0"
 )
+
+
+# =====================================================
+# DATABASE TABLE CREATION
+# =====================================================
+
+@app.on_event("startup")
+def create_database_tables():
+
+    Base.metadata.create_all(bind=engine)
+
+    print("Database tables created successfully!")
 
 
 # =====================================================
