@@ -4,7 +4,10 @@ from fastapi import HTTPException
 import pandas as pd
 import os
 
-from sqlalchemy import text
+from sqlalchemy import (
+    text, MetaData, Table, Column,
+    Integer, BigInteger, Float, Boolean, DateTime, Text
+)
 
 from ..database import engine
 from ..services.cleaning import clean_data
@@ -152,21 +155,72 @@ async def upload_file(
     # 8. Store DataFrame in MySQL
     # =========================
 
-    try:
+   try:
 
+    metadata = MetaData()
+
+    # Create an automatic primary key
+    primary_key_name = "record_id"
+
+    while primary_key_name in df.columns:
+        primary_key_name += "_"
+
+    sql_columns = [
+        Column(
+            primary_key_name,
+            Integer,
+            primary_key=True,
+            autoincrement=True
+        )
+    ]
+
+    # Automatically detect column data types
+    for column in df.columns:
+
+        if pd.api.types.is_integer_dtype(df[column]):
+            column_type = BigInteger
+
+        elif pd.api.types.is_float_dtype(df[column]):
+            column_type = Float
+
+        elif pd.api.types.is_bool_dtype(df[column]):
+            column_type = Boolean
+
+        elif pd.api.types.is_datetime64_any_dtype(df[column]):
+            column_type = DateTime
+
+        else:
+            column_type = Text
+
+        sql_columns.append(
+            Column(str(column), column_type)
+        )
+
+    # Create table with primary key
+    dataset_table = Table(
+        table_name,
+        metadata,
+        *sql_columns
+    )
+
+    with engine.begin() as connection:
+
+        dataset_table.create(connection)
+
+        # Insert uploaded dataset
         df.to_sql(
             table_name,
-            con=engine,
-            if_exists="replace",
+            con=connection,
+            if_exists="append",
             index=False
         )
 
-    except Exception as e:
+except Exception as e:
 
-        raise HTTPException(
-            status_code=500,
-            detail=f"Could not store data in MySQL: {str(e)}"
-        )
+    raise HTTPException(
+        status_code=500,
+        detail=f"Could not store data in MySQL: {str(e)}"
+    )
 
 
     # =========================
